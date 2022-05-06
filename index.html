@@ -6,15 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
-    <script src="app.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-    <div x-data="pizzas"></div>
+    <script src="app.js"></script>
+    <div x-data="pizzas">
     <div>
         <div>
             <h1>Perfect Pizza</h1>
         </div>
+        <div class="cart" x-show="smallCount != 0 || medCount != 0 || largeCount != 0">
+            <h2>Let's see how much you've bought</h2>
+            <div class="smalls" x-show="smallCount != 0">
+                <span x-text="smallCount"></span><span> X Small Pizza(s)</span>
+                <button @click="removeSmall">-</button>
+                <button @click="addSmall">+</button>
+            </div>
+            <div class="mediums" x-show="medCount != 0">
+                <span x-text="medCount"></span><span> X Medium Pizza(s)</span>
+                <button @click="removeMed">-</button>
+                <button @click="addMed">+</button>
+            </div>
+            <div class="larges" x-show="largeCount != 0">
+                <span x-text="largeCount"></span><span> X Large Pizza(s)</span>
+                <button @click="removeLarge">-</button>
+                <button @click="addLarge">+</button>
+            </div>
+            <span>You are to pay R</span><span class="total" x-text="getTotal()"></span>
+            <br>
+            <input type="text" placeholder="tendered" x-model="tendered"><button @click="checkout">Checkout</button>
+            <p x-text="feedbackText"></p>
+        </div>
         <div class="specials">
+            <div class="small">
+                <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
+                <h2>Small Pizza</h2>
+                <h3>R48.99</h3>
+                <i>
+                  <ul>
+                    <li>small pizza with 3 toppings</li>
+                    <li>1 meat topping.</li>
+                    <li>3 or less other toppings.</li>
+                  </ul>
+                </i>
+                <button @click="addSmall(smallCount)">Add</button>
+              </div>
             <div class="medium">
               <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
               <h2>Medium Pizza</h2>
@@ -24,7 +60,7 @@
                 2 or less meat topping.
                 3 or less other toppings.
               </i>
-              
+              <button @click="addMed(medCount)">Add</button>
             </div>
             <div class="large">
               <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
@@ -35,19 +71,9 @@
                 3 meat toppings max.
                 3 or less other toppings.
               </i>
+              <button @click="addLarge(largeCount)">Add</button>
             </div>
-            <div class="small">
-              <img  src="https://image.shutterstock.com/image-vector/italian-pizza-tomato-sausage-olive-600w-554691619.jpg" alt="">
-              <h2>Small Pizza</h2>
-              <h3>R48.99</h3>
-              <i>
-                <ul>
-                  <li>small pizza with 3 toppings</li>
-                  <li>1 meat topping.</li>
-                  <li>3 or less other toppings.</li>
-                </ul>
-              </i>
-            </div>
+            
         </div>
         <div class="footer">
             <div class="contact">
@@ -67,5 +93,6 @@
             </div>
         </div>
       </div>
+    </div>
 </body>
 </html>

@@ -31,18 +31,21 @@ document.addEventListener('alpine:init', () => {
 
 
         getSmallTotal(){
-            return this.smallCount * this.smallPrice
+            let total = this.smallCount * this.smallPrice
+            return total
         },
         getMedTotal(){
-            return this.medCount * this.medPrice
+            let total = this.medCount * this.medPrice
+            return total
         },
         getLargeTotal(){
-            return this.largeCount * this.largePrice
+            let total = this.largeCount * this.largePrice
+            return total
         },
 
         getTotal(){
             let total = this.getSmallTotal() + this.getMedTotal() + this.getLargeTotal()
-            return total.toFixed(2)
+            return total
         },
 
         feedbackText(){
@@ -54,10 +57,15 @@ document.addEventListener('alpine:init', () => {
         },
 
         checkout(){
-            this.smallCount = 0
-            this.medCount = 0
-            this.largeCount = 0
-            window.alert('Successful Purchase')
+            if(this.feedbackText() == 'Insufficient funds'){
+                window.alert('Insufficient funds.')
+            }else{
+                this.smallCount = 0
+                this.medCount = 0
+                this.largeCount = 0
+                window.alert('Successful Purchase')
+            }
+            
         }
     }))
 })

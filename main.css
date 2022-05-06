@@ -4,6 +4,17 @@ body {
     background-color: #3FA9E2;
     font-size: 0.75em;
   }
+
+  .smalls, .mediums, .larges {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px 0;
+  }
+
+  .checkout-section {
+      margin: 5px 0;
+  }
   
   .small {
     background-color: #E03571;
@@ -70,5 +81,4 @@ body {
     
   }
   
-  
-  
+    

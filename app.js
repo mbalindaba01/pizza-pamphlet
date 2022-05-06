@@ -1,4 +1,3 @@
-console.log('it is working')
 document.addEventListener('alpine:init', () => {
     Alpine.data('pizzas', () => ({
         smallCount: 0,
@@ -63,6 +62,7 @@ document.addEventListener('alpine:init', () => {
                 this.smallCount = 0
                 this.medCount = 0
                 this.largeCount = 0
+                this.tendered = ''
                 window.alert('Successful Purchase')
             }
             

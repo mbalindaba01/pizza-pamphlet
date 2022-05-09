@@ -67,7 +67,7 @@ document.addEventListener('alpine:init', () => {
                 this.tendered = ''
                 this.cartCount = 0
             }else if(this.tendered === ''){
-                this.feedbackText = 'Please put in tendered amount'
+                this.feedbackText = 'Please enter tendered amount'
             }
             setTimeout(() => {
                 this.feedbackText = ''

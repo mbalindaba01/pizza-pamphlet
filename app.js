@@ -7,25 +7,33 @@ document.addEventListener('alpine:init', () => {
         medPrice: 78.99,
         largePrice: 114.99,
         tendered: '',
+        cartCount: 0,
+        feedbackText: '',
         addSmall(){
             this.smallCount++
+            this.cartCount++
         },
         addMed(){
             this.medCount++
+            this.cartCount++
         },
         addLarge(){
             this.largeCount++
+            this.cartCount++
         },
         removeSmall(){
             this.smallCount--
+            this.cartCount--
         },
 
         removeMed(){
             this.medCount--
+            this.cartCount--
         },
 
         removeLarge(){
             this.largeCount--
+            this.cartCount--
         },
 
 
@@ -47,27 +55,26 @@ document.addEventListener('alpine:init', () => {
             return total
         },
 
-        feedbackText(){
-            if(this.getTotal() > parseFloat(this.tendered)){
-                return 'Insufficient funds'
-            }else if(this.getTotal() <= parseFloat(this.tendered)){
-                return 'Funds are enough. Let\'s checkout'
-            }
-        },
-
         checkout(){
-            if(this.feedbackText() == 'Insufficient funds'){
-                window.alert('Insufficient funds.')
+            if(this.getTotal() > parseFloat(this.tendered)){
+                this.feedbackText = 'Insufficient funds'
+            }else if(this.getTotal() <= parseFloat(this.tendered)){
+                console.log('it is working')
+                this.feedbackText = 'Successful purchase'
             }else if(this.tendered === ''){
-                window.alert('Please put in tendered amount')
+                this.feedbackText = 'Please put in tendered amount'
             }else{
                 this.smallCount = 0
                 this.medCount = 0
                 this.largeCount = 0
                 this.tendered = ''
-                window.alert('Successful Purchase')
+                this.cartCount = 0
+                this.feedbackText = 'Successful Purchase'
             }
-            
+        },
+
+        getFeedbackText(){
+            return this.feedbackText
         }
     }))
 })

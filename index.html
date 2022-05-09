@@ -7,6 +7,7 @@
     <title>Pizza Pamphlet</title>
     <link rel="stylesheet" href="main.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://use.fontawesome.com/7e5be8745d.js"></script>
 </head>
 <body>
     <script src="app.js"></script>
@@ -15,47 +16,58 @@
         <div>
             <h1 class="heading">Perfect Pizza</h1>
         </div>
-        <div class="cart" x-show="smallCount != 0 || medCount != 0 || largeCount != 0">
-            <h2>Let's see how much you've bought</h2>
-            <div class="smalls" x-show="smallCount != 0">
-                <div>
-                    <span x-text="smallCount"></span><span> X Small Pizza(s)</span>
-                    <button @click="removeSmall">-</button>
-                    <button @click="addSmall">+</button>
+        <div class="checkout-text" x-show="getFeedbackText() != '' ">
+            <p x-text="getFeedbackText"></p>
+        </div>
+        <div class="cart-container" x-data="{ show: false }">
+            <div class="cart-icon">
+                <p x-text="cartCount" class="cart-count"></p>
+                <i class="fa fa-2x fa-shopping-cart" @click="show=!show"></i>
+            </div>
+            <div class="cart" x-show="(smallCount != 0 || medCount != 0 || largeCount != 0) && show==true">
+                <h2 class="cart-heading">Let's see how much you've bought</h2>
+                <div class="smalls" x-show="smallCount != 0">
+                    <div>
+                        <span x-text="smallCount"></span><span> X Small Pizza(s)</span>
+                        <button @click="removeSmall">-</button>
+                        <button @click="addSmall">+</button>
+                    </div>
+                    <div>
+                        <span>Total R</span>
+                        <span x-text="getSmallTotal().toFixed(2)"></span>
+                    </div>
                 </div>
-                <div>
-                    <span>Total R</span>
-                    <span x-text="getSmallTotal().toFixed(2)"></span>
+                <div class="mediums" x-show="medCount != 0">
+                    <div>
+                        <span x-text="medCount"></span><span> X Medium Pizza(s)</span>
+                        <button @click="removeMed">-</button>
+                        <button @click="addMed">+</button>
+                    </div>
+                    <div>
+                        <span>Total R</span>
+                        <span x-text="getMedTotal().toFixed(2)"></span>
+                    </div>
+                </div>
+                <div class="larges" x-show="largeCount != 0">
+                    <div>
+                        <span x-text="largeCount"></span><span> X Large Pizza(s)</span>
+                        <button @click="removeLarge">-</button>
+                        <button @click="addLarge">+</button>
+                    </div>
+                    <div>
+                        <span>Total R</span>
+                        <span x-text="getLargeTotal().toFixed(2)"></span>
+                    </div>
                 </div>
             </div>
-            <div class="mediums" x-show="medCount != 0">
-                <div>
-                    <span x-text="medCount"></span><span> X Medium Pizza(s)</span>
-                    <button @click="removeMed">-</button>
-                    <button @click="addMed">+</button>
-                </div>
-                <div>
-                    <span>Total R</span>
-                    <span x-text="getMedTotal().toFixed(2)"></span>
-                </div>
-            </div>
-            <div class="larges" x-show="largeCount != 0">
-                <div>
-                    <span x-text="largeCount"></span><span> X Large Pizza(s)</span>
-                    <button @click="removeLarge">-</button>
-                    <button @click="addLarge">+</button>
-                </div>
-                <div>
-                    <span>Total R</span>
-                    <span x-text="getLargeTotal().toFixed(2)"></span>
-                </div>
-            </div>
+        </div>
+        
+        <div class="total-payment" x-show="smallCount != 0 || medCount != 0 || largeCount != 0">
             <span>You are to pay R</span><span class="total" x-text="getTotal().toFixed(2)"></span>
             <br>
             <div class="checkout-section">
                 <input type="text" placeholder="tendered" x-model="tendered"><button @click="checkout">Checkout</button>
             </div>
-            <p x-text="feedbackText"></p>
         </div>
         <div class="specials">
             <div class="small">

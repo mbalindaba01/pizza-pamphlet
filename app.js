@@ -58,6 +58,8 @@ document.addEventListener('alpine:init', () => {
         checkout(){
             if(this.feedbackText() == 'Insufficient funds'){
                 window.alert('Insufficient funds.')
+            }else if(this.tendered === ''){
+                window.alert('Please put in tendered amount')
             }else{
                 this.smallCount = 0
                 this.medCount = 0

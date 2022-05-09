@@ -1,4 +1,5 @@
 document.addEventListener('alpine:init', () => {
+    const error = document.querySelector('.checkout-text')
     Alpine.data('pizzas', () => ({
         smallCount: 0,
         medCount: 0,
@@ -59,18 +60,18 @@ document.addEventListener('alpine:init', () => {
             if(this.getTotal() > parseFloat(this.tendered)){
                 this.feedbackText = 'Insufficient funds'
             }else if(this.getTotal() <= parseFloat(this.tendered)){
-                console.log('it is working')
                 this.feedbackText = 'Successful purchase'
-            }else if(this.tendered === ''){
-                this.feedbackText = 'Please put in tendered amount'
-            }else{
                 this.smallCount = 0
                 this.medCount = 0
                 this.largeCount = 0
                 this.tendered = ''
                 this.cartCount = 0
-                this.feedbackText = 'Successful Purchase'
+            }else if(this.tendered === ''){
+                this.feedbackText = 'Please put in tendered amount'
             }
+            setTimeout(() => {
+                this.feedbackText = ''
+            }, 3000);
         },
 
         getFeedbackText(){

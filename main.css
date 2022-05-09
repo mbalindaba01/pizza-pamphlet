@@ -39,8 +39,12 @@ body {
   .cart-icon {
     position: absolute;
     top: 1em;
-    right: 1em;  
+    right: 2em;  
     display: flex;
+  }
+
+  .shake-icon {
+    animation: shakeCart .4s ease-in-out forwards;
   }
 
   .fa-shopping-cart {
@@ -48,7 +52,7 @@ body {
     color: #eee;
     background: #350836;
     border-radius: 5px;
-    padding: 0.5em;
+    padding: 0.2em;
     cursor: pointer;
   }
 
@@ -68,7 +72,7 @@ body {
   }
 
   .total-payment {
-    margin: 1em;
+    margin: 0.2em 1em;
   }
 
   .add {
@@ -107,6 +111,13 @@ body {
     color: #eee;
   }
 
+  .error {
+    background: red;
+    text-align: center;
+    padding: 1em;
+    width: 100%;
+  }
+
   .checkout-text {
     background: #2bd156;
     height: 3em;
@@ -115,7 +126,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #eee;
-    font-size: 2em;
+    font-size: 1em;
     text-align: center;
     animation-name: fadeOut;
     animation-duration: 4s;
@@ -127,9 +138,24 @@ body {
   }
 
   @keyframes fadeOut {
-    0% {opacity: 1;}
+    0% {opacity: 1; display: block;}
     100% {opacity: 0; display: none;}
  }
+
+ @keyframes shakeCart {
+  25% {
+    transform:translateX(6px)
+  }
+  50% {
+    transform:translateX(-4px);
+  }
+  75% {
+    transform:translateX(2px);
+  }
+  100% {
+    transform:translateX(0);
+  }
+}
   
   .small, .medium, .large {
     position: relative;
@@ -209,6 +235,10 @@ body {
 
     .checkout-text{
       width: 35%;
+    }
+
+    .fa-shopping-cart {
+      padding: 0.5em;
     }
 
     .small, .medium, .large {

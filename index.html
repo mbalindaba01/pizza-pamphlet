@@ -17,12 +17,13 @@
             <h1 class="heading">Perfect Pizza</h1>
         </div>
         <div class="checkout-text" x-show="getFeedbackText() != '' ">
-            <p x-text="getFeedbackText"></p>
+            <p class="error" x-text="getFeedbackText" x-show="getFeedbackText() == 'Please put in tendered amount' || getFeedbackText() == 'Insufficient funds'"></p>
+            <p class="success" x-text="getFeedbackText" x-show="getFeedbackText() == 'Successful purchase'" @click="console.log('Hey')"></p>
         </div>
         <div class="cart-container" x-data="{ show: false }">
             <div class="cart-icon">
                 <p x-text="cartCount" class="cart-count"></p>
-                <i class="fa fa-2x fa-shopping-cart" @click="show=!show"></i>
+                <i class="fa fa-2x fa-shopping-cart " @click="show=!show"></i>
             </div>
             <div class="cart" x-show="(smallCount != 0 || medCount != 0 || largeCount != 0) && show==true">
                 <h2 class="cart-heading">Let's see how much you've bought</h2>

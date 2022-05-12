@@ -10,6 +10,8 @@ document.addEventListener('alpine:init', () => {
         tendered: '',
         cartCount: 0,
         feedbackText: '',
+        change: 0,
+        successText : '',
         addSmall(){
             this.smallCount++
             this.cartCount++
@@ -56,11 +58,17 @@ document.addEventListener('alpine:init', () => {
             return total
         },
 
+        getChange(){
+            change = parseFloat(this.tendered - this.getTotal())
+            return change
+        },
+
         checkout(){
             if(this.getTotal() > parseFloat(this.tendered)){
                 this.feedbackText = 'Insufficient funds'
             }else if(this.getTotal() <= parseFloat(this.tendered)){
-                this.feedbackText = 'Successful purchase'
+                this.feedbackText = 'Successful purchase. Your change is R' + this.getChange().toFixed(2)
+                this.successText = 'Successful purchase. Your change is R' + this.getChange().toFixed(2)
                 this.smallCount = 0
                 this.medCount = 0
                 this.largeCount = 0
@@ -72,6 +80,10 @@ document.addEventListener('alpine:init', () => {
             setTimeout(() => {
                 this.feedbackText = ''
             }, 3000);
+        },
+
+        getSuccessText(){
+            return this.successText
         },
 
         getFeedbackText(){

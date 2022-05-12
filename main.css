@@ -225,7 +225,9 @@ body {
   button {
     cursor: pointer;
   }
-  
+  .cart-add-remove {
+    background: yellow;
+  }
   
   @media (min-width: 768px){
   
